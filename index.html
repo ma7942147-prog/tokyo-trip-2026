@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>東京家族旅行手冊 2026/10/5–12</title>
+<style>
+  :root {
+    --bg: #f7f3ee;
+    --card-bg: #ffffff;
+    --text: #2a2420;
+    --text-soft: #6b5f56;
+    --accent: #8a3324;
+    --accent-soft: #c96b4f;
+    --border: #e6ddd2;
+    --tag-bg: #f0e6da;
+    --pill-bg: #ffffff;
+    --pill-border: #e0d3c2;
+    --pill-active-bg: #8a3324;
+    --pill-active-text: #ffffff;
+    --table-head: #ede1d3;
+    --shadow: 0 2px 10px rgba(60, 40, 20, 0.08);
+    --ok-bg: #e6efe2;
+    --ok-text: #3d6b31;
+    --warn-bg: #fbeadb;
+    --warn-text: #9a5b1f;
+    --pending-bg: #f3e3e3;
+    --pending-text: #a13d3d;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1c1815;
+      --card-bg: #262019;
+      --text: #f0e9df;
+      --text-soft: #b8ab9c;
+      --accent: #d97a5f;
+      --accent-soft: #e8a78d;
+      --border: #3a322a;
+      --tag-bg: #332a22;
+      --pill-bg: #262019;
+      --pill-border: #4a4038;
+      --pill-active-bg: #d97a5f;
+      --pill-active-text: #1c1815;
+      --table-head: #33291f;
+      --shadow: 0 2px 10px rgba(0,0,0,0.35);
+      --ok-bg: #24331f;
+      --ok-text: #a9d69a;
+      --warn-bg: #3a2c17;
+      --warn-text: #e7b46e;
+      --pending-bg: #3a2323;
+      --pending-text: #e29a9a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1c1815;
+    --card-bg: #262019;
+    --text: #f0e9df;
+    --text-soft: #b8ab9c;
+    --accent: #d97a5f;
+    --accent-soft: #e8a78d;
+    --border: #3a322a;
+    --tag-bg: #332a22;
+    --pill-bg: #262019;
+    --pill-border: #4a4038;
+    --pill-active-bg: #d97a5f;
+    --pill-active-text: #1c1815;
+    --table-head: #33291f;
+    --shadow: 0 2px 10px rgba(0,0,0,0.35);
+    --ok-bg: #24331f;
+    --ok-text: #a9d69a;
+    --warn-bg: #3a2c17;
+    --warn-text: #e7b46e;
+    --pending-bg: #3a2323;
+    --pending-text: #e29a9a;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    line-height: 1.6;
+  }
+  header.banner {
+    background: linear-gradient(120deg, var(--accent) 0%, var(--accent-soft) 100%);
+    color: #fff;
+    padding: 32px 20px 26px;
+    padding-top: calc(32px + env(safe-area-inset-top, 0px));
+  }
+  header.banner h1 {
+    margin: 0 0 10px;
+    font-size: 1.7rem;
+    font-weight: 800;
+  }
+  header.banner .dates {
+    font-size: 1rem;
+    opacity: 0.95;
+    margin-bottom: 10px;
+  }
+  header.banner .meta {
+    font-size: 0.88rem;
+    opacity: 0.92;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+  }
+  header.banner .meta span::after {
+    content: "・";
+    margin-left: 14px;
+    opacity: 0.7;
+  }
+  header.banner .meta span:last-child::after { content: ""; margin: 0; }
+
+  nav.tabs-wrap {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+    padding: 14px 16px 10px;
+  }
+  .tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+  }
+  .tabs::-webkit-scrollbar { height: 5px; }
+  .tabs::-webkit-scrollbar-thumb { background: var(--pill-border); border-radius: 4px; }
+  .pill {
+    flex: 0 0 auto;
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    color: var(--text);
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .pill.active {
+    background: var(--pill-active-bg);
+    color: var(--pill-active-text);
+    border-color: var(--pill-active-bg);
+  }
+
+  main { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
+  .panel { display: none; }
+  .panel.active { display: block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0 14px;
+  }
+  .section-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 6px;
+  }
+  .section-title h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+  .section-title hr {
+    display: none;
+  }
+  .section-underline {
+    border: none;
+    border-top: 2px solid var(--accent);
+    opacity: 0.35;
+    margin: 0 0 18px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  .card h3 {
+    margin: 0 0 12px;
+    font-size: 1.02rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h3 .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    background: var(--tag-bg);
+    color: var(--text-soft);
+    padding: 2px 9px;
+    border-radius: 999px;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .table-scroll { overflow-x: auto; }
+  th, td {
+    text-align: left;
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  th { background: var(--table-head); font-weight: 700; }
+  td.wrap, th.wrap { white-space: normal; }
+
+  .kv { width: 100%; font-size: 0.92rem; }
+  .kv tr td:first-child {
+    color: var(--text-soft);
+    width: 30%;
+    font-weight: 600;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .badge.ok { background: var(--ok-bg); color: var(--ok-text); }
+  .badge.warn { background: var(--warn-bg); color: var(--warn-text); }
+  .badge.pending { background: var(--pending-bg); color: var(--pending-text); }
+
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li {
+    position: relative;
+    padding: 4px 0 16px 26px;
+    border-left: 2px solid var(--border);
+    margin-left: 6px;
+  }
+  .timeline li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .timeline .time {
+    font-weight: 700;
+    color: var(--accent);
+    margin-right: 8px;
+    font-size: 0.9rem;
+  }
+  .timeline .desc { font-size: 0.93rem; }
+  .timeline .note {
+    display: block;
+    font-size: 0.83rem;
+    color: var(--text-soft);
+    margin-top: 3px;
+  }
+
+  .note-box {
+    background: var(--tag-bg);
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    margin-top: 10px;
+  }
+
+  .option-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 640px) {
+    .option-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .option-card {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .option-card h4 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+  }
+  .option-card ul { margin: 0; padding-left: 18px; font-size: 0.88rem; }
+
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    font-size: 0.9rem;
+    align-items: flex-start;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; }
+
+  footer {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+
+<header class="banner">
+  <h1>🗼 東京家族旅行手冊</h1>
+  <div class="dates">2026年10月5日（一）－10月12日（一）／7夜8天</div>
+  <div class="meta">
+    <span>成員：3人（馬士欽・孫梅燕・馬于涵）</span>
+    <span>星宇航空直飛（訂單 ORD0031994683・已開票）</span>
+    <span>住宿 Brillia ist Kinshi Park（錦絲町）</span>
+    <span>10/12 體育之日連假期間</span>
+  </div>
+</header>
+
+<nav class="tabs-wrap">
+  <div class="tabs" id="tabs">
+    <button class="pill active" data-target="panel-info">基本資訊</button>
+    <button class="pill" data-target="panel-d1">D1 抵達</button>
+    <button class="pill" data-target="panel-d2">D2 淺草</button>
+    <button class="pill" data-target="panel-d3">D3 鎌倉</button>
+    <button class="pill" data-target="panel-d4">D4 箱根</button>
+    <button class="pill" data-target="panel-d5">D5 橫濱</button>
+    <button class="pill" data-target="panel-d6">D6 澀谷原宿</button>
+    <button class="pill" data-target="panel-d7">D7 銀座六本木</button>
+    <button class="pill" data-target="panel-d8">D8 返程</button>
+    <button class="pill" data-target="panel-transit">交通速查</button>
+    <button class="pill" data-target="panel-food">美食</button>
+    <button class="pill" data-target="panel-todo">出發前待辦</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 基本資訊 -->
+  <section class="panel active" id="panel-info">
+    <div class="section-title"><span class="section-badge">01</span><h2>基本資訊</h2></div>
+    <hr class="section-underline">
+
+    <div class="card">
+      <h3>航班 <span class="tag">星宇航空・已開票確認</span></h3>
+      <div class="table-scroll">
+      <table>
+        <tr><th>日期</th><th>航段</th><th>班次</th><th>起飛</th><th>抵達</th><th>飛行</th></tr>
+        <tr><td>10/5（一）</td><td>TPE桃園T1 → NRT成田T2</td><td>JX804</td><td>15:00</td><td>19:25</td><td>3小時25分</td></tr>
+        <tr><td>10/12（一）</td><td>NRT成田T2 → TPE桃園T1</td><td>JX801</td><td>14:10</td><td>16:50</td><td>3小時40分</td></tr>
+      </table>
+      </div>
+      <table class="kv" style="margin-top:12px;">
+        <tr><td>訂單編號</td><td>ORD0031994683（易遊網）</td></tr>
+        <tr><td>訂單狀態</td><td><span class="badge ok">已確認</span></td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>住宿 <span class="tag">錦絲町</span></h3>
+      <table class="kv">
+        <tr><td>名稱</td><td>Brillia ist Kinshi Park（Airbnb 公寓型住宿）</td></tr>
+        <tr><td>入住期間</td><td>2026/10/5 ～ 2026/10/12（7晚，全程住這裡）</td></tr>
+        <tr><td>位置</td><td>錦絲町（JR總武線／東京地下鐵半藏門線），步行可達 Orinas錦糸町 購物中心</td></tr>
+        <tr><td>狀態</td><td><span class="badge warn">確切門牌與入住方式待對照 Airbnb 訂單確認</span></td></tr>
+      </table>
+      <div class="note-box">
+        住宿已從原先評估的上野青年旅舍改為錦絲町公寓，本手冊所有交通路線皆以「錦絲町」為起訖基準點。
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>日本假期提醒</h3>
+      <p style="margin:0; font-size:0.92rem;">
+        10/5～10/12 期間，日本只有一個國定假日：<strong>10/12（一）體育之日（スポーツの日）</strong>，恰逢回程當天，並與週末（10/10、10/11）連成三天連假。
+        10/10～10/12 熱門景點與交通會比平日擁擠，回程當天建議提早前往成田機場。
+      </p>
+    </div>
+  </section>
+
+  <!-- D1 -->
+  <section class="panel" id="panel-d1">
+    <div class="section-title"><span class="section-badge">D1</span><h2>10/5（一）抵達日</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>行程時間軸</h3>
+      <ul class="timeline">
+        <li><span class="time">15:00</span><span class="desc">桃園機場T1起飛（JX804）</span></li>
+        <li><span class="time">19:25</span><span class="desc">抵達成田機場T2</span><span class="note">連假前平日抵達，入境與行李提領時間可預留約1小時</span></li>
+        <li><span class="time">約20:30</span><span class="desc">搭電車前往錦絲町</span><span class="note">建議路線：成田特快N'EX 或 京成本線＋都營淺草線轉乘，實際班次請以當日時刻表為準</span></li>
+        <li><span class="time">約21:30</span><span class="desc">抵達 Brillia ist Kinshi Park，check-in</span></li>
+        <li><span class="time">晚餐</span><span class="desc">錦絲町車站周邊或 Orinas錦糸町 美食街</span><span class="note">抵達已晚，選擇車站步行範圍內即可用餐的地方</span></li>
+      </ul>
+      <div class="note-box">待辦：出發前確認 Airbnb 自助入住流程（鑰匙盒密碼／有人接待），避免深夜抵達卡關。</div>
+    </div>
+  </section>
+
+  <!-- D2 -->
+  <section class="panel" id="panel-d2">
+    <div class="section-title"><span class="section-badge">D2</span><h2>10/6（二）淺草美食日</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>交通</h3>
+      <p style="margin:0; font-size:0.9rem;">錦絲町 → 淺草：總武線轉乘或都營淺草線直達，車程約15-20分。</p>
+    </div>
+    <div class="card">
+      <h3>行程時間軸</h3>
+      <ul class="timeline">
+        <li><span class="time">上午</span><span class="desc">淺草寺、雷門、仲見世通</span></li>
+        <li><span class="time">午餐</span><span class="desc">天婦羅 大黒家 本店（招牌4尾炸蝦天丼，約¥2,000-3,000/人）</span><span class="note">只收現金，不接受訂位，用餐時間常大排長龍，記得帶現金</span></li>
+        <li><span class="time">午後</span><span class="desc">淺草寺周邊散策 → とんかつ 夏の家（炸豬排定食，可外帶小點心）</span></li>
+        <li><span class="time">下午2點前</span><span class="desc">壽壽喜園 淺草本店（七種濃度抹茶冰淇淋）</span><span class="note">整理券常在下午2點前（假日甚至中午）發完，建議中午後儘早前往排隊</span></li>
+        <li><span class="time">可選加碼</span><span class="desc">谷根千（谷中銀座）／晴空塔／上野公園</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- D3 -->
+  <section class="panel" id="panel-d3">
+    <div class="section-title"><span class="section-badge">D3</span><h2>10/7（三）鎌倉一日遊</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>交通</h3>
+      <p style="margin:0; font-size:0.9rem;">錦絲町 → 東京站轉JR橫須賀線直達鎌倉，車程約1小時內。</p>
+    </div>
+    <div class="card">
+      <h3>行程時間軸</h3>
+      <ul class="timeline">
+        <li><span class="time">上午</span><span class="desc">鶴岡八幡宮</span></li>
+        <li><span class="time">上午～中午</span><span class="desc">高德院大佛（江之電或步行前往）</span></li>
+        <li><span class="time">13:15</span><span class="desc">稲村崎Yoridocoro（已訂位，定食套餐）</span><span class="note">待確認：訂位表單是否完整選好定食項目、¥1,000/人是否為座位費（單獨於餐費之外）</span></li>
+        <li><span class="time">下午</span><span class="desc">由比濱海灘</span></li>
+        <li><span class="time">選配</span><span class="desc">江之島延伸行程（視體力調整）</span></li>
+      </ul>
+      <div class="note-box">
+        參考：本人已於9/13（日）進行個人踏查，走訪高德院大佛、長谷寺、鶴岡八幡宮，人潮尚可，比印象中多年前的舊經驗好很多；踏查期間於藤澤住2晚單人房（東京週末住宿較貴，作為替代方案）。
+      </div>
+    </div>
+  </section>
+
+  <!-- D4 -->
+  <section class="panel" id="panel-d4">
+    <div class="section-title"><span class="section-badge">D4</span><h2>10/8（四）箱根一日遊</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>交通與票券</h3>
+      <p style="margin:0 0 8px; font-size:0.9rem;">錦絲町 → 新宿轉小田急浪漫特快直達箱根湯本。</p>
+      <div class="note-box">從錦絲町到新宿比原先「上野出發」多一段轉乘，建議比原訂時間表多預留15-20分鐘。</div>
+      <table class="kv" style="margin-top:10px;">
+        <tr><td>建議票券</td><td>箱根周遊券 新宿版2日券（大人¥6,100、兒童¥1,100），涵蓋登山電車、纜車、海賊船、巴士等8種交通</td></tr>
+        <tr><td>浪漫特快</td><td>另補特急券約¥1,200（免基本車票費）</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>行程時間軸（早出晚歸）</h3>
+      <ul class="timeline">
+        <li><span class="time">早出</span><span class="desc">錦絲町出發 → 新宿轉乘浪漫特快</span></li>
+        <li><span class="time">上午</span><span class="desc">抵達箱根湯本 → 轉登山電車到強羅</span></li>
+        <li><span class="time">中午</span><span class="desc">早雲山纜車 → 大涌谷（吃黑蛋）</span></li>
+        <li><span class="time">下午</span><span class="desc">蘆之湖海賊船 → 箱根神社（水上鳥居）</span><span class="note">體力吃緊時，箱根神社或雕刻之森美術館可擇一割捨，優先保留大涌谷＋海賊船</span></li>
+        <li><span class="time">傍晚</span><span class="desc">回箱根湯本逛商店街 → 浪漫特快返回新宿</span></li>
+        <li><span class="time">晚餐</span><span class="desc">eggslut 或 牛たんの檸檬（新宿分店）</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- D5 -->
+  <section class="panel" id="panel-d5">
+    <div class="section-title"><span class="section-badge">D5</span><h2>10/9（五）橫濱一日遊</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>交通</h3>
+      <p style="margin:0; font-size:0.9rem;">錦絲町 → 石川町：搭JR總武線接京濱東北・根岸線，較原先「上野直達」多一段轉乘，請預留轉乘緩衝時間。</p>
+    </div>
+    <div class="card">
+      <h3>行程時間軸</h3>
+      <ul class="timeline">
+        <li><span class="time">上午</span><span class="desc">抵達石川町站，步行至中華街</span></li>
+        <li><span class="time">中華街</span><span class="desc">逛街、早午餐</span></li>
+        <li><span class="time">午後</span><span class="desc">山下公園散步（看港口、冰川丸號郵輪）</span></li>
+        <li><span class="time">午後～下午</span><span class="desc">ワンダリア横浜（Wonderia橫濱）— BASEGATE橫濱關內 Tower 3F・4F</span><span class="note">2026年3月新開幕沉浸式數位藝術體驗設施，森林、深海等6大主題區；成人票約¥2,900起，建議停留1.5-2小時。從關內站步行1分鐘，中華街步行約15-20分或轉乘1站可達；此站會拉長行程，建議視體力與時間，二擇一取代下方「紅磚倉庫」或「合味道紀念館」</span></li>
+        <li><span class="time">下午</span><span class="desc">紅磚倉庫，逛文創市集</span><span class="note">若女兒對麵包超人有興趣，橫濱麵包超人兒童博物館可取代此站；若排了ワンダリア横浜，此站可省略</span></li>
+        <li><span class="time">傍晚</span><span class="desc">港未來：合味道紀念館 或 橫濱地標大廈68樓Sky Garden看夕陽</span></li>
+        <li><span class="time">夜晚</span><span class="desc">CosmoWorld摩天輪（點燈拍照）</span></li>
+        <li><span class="time">回程</span><span class="desc">橫濱站搭JR返回錦絲町</span></li>
+      </ul>
+      <div class="note-box">ワンダリア横浜是2026年才開幕的新景點，行程尚未實測時間分配，建議出發前再依當天體力決定是否排入、要犧牲哪一站。</div>
+    </div>
+  </section>
+
+  <!-- D6 -->
+  <section class="panel" id="panel-d6">
+    <div class="section-title"><span class="section-badge">D6</span><h2>10/10（六）澀谷・原宿（連假起）</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>行程時間軸</h3>
+      <ul class="timeline">
+        <li><span class="time">上午</span><span class="desc">澀谷scramble crossing</span></li>
+        <li><span class="time">午餐</span><span class="desc">俺流塩らーめん（近表參道）</span></li>
+        <li><span class="time">下午</span><span class="desc">原宿竹下通、明治神宮</span></li>
+        <li><span class="time">選配繞路</span><span class="desc">中目黒 im donuts、三ツ矢堂（短程繞路）</span></li>
+      </ul>
+      <div class="note-box">連假第一天，人潮會比平日明顯增加，動線建議保持彈性。</div>
+    </div>
+  </section>
+
+  <!-- D7 -->
+  <section class="panel" id="panel-d7">
+    <div class="section-title"><span class="section-badge">D7</span><h2>10/11（日）銀座・東京車站・六本木美食日</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>行程時間軸</h3>
+      <ul class="timeline">
+        <li><span class="time">上午</span><span class="desc">銀座逛街</span><span class="note">可安排築地場外市場早餐／海鮮</span></li>
+        <li><span class="time">午餐／晚餐候選</span><span class="desc">東京壽司、鰻ひつまぶし備長、喜助、麵屋武蔵 虎嘯</span><span class="note">連假期間人潮較多，熱門店家建議事先訂位</span></li>
+        <li><span class="time">下午</span><span class="desc">東京車站一番街、丸之內周邊 或 六本木之丘展望台</span></li>
+      </ul>
+      <div class="note-box">此日行程方向已定案為「銀座／東京車站／六本木美食路線」，取代原本的迪士尼／台場／teamLab方案。</div>
+    </div>
+  </section>
+
+  <!-- D8 -->
+  <section class="panel" id="panel-d8">
+    <div class="section-title"><span class="section-badge">D8</span><h2>10/12（一）體育之日・回程日</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>行程時間軸</h3>
+      <ul class="timeline">
+        <li><span class="time">上午</span><span class="desc">Brillia ist Kinshi Park 退房</span></li>
+        <li><span class="time">上午</span><span class="desc">提早前往成田機場</span><span class="note">國定假日＋連假最後一天，機場與電車會比平日繁忙，建議比平常提早出發</span></li>
+        <li><span class="time">14:10</span><span class="desc">成田機場T2起飛（JX801）</span></li>
+        <li><span class="time">16:50</span><span class="desc">抵達桃園機場T1</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 交通速查 -->
+  <section class="panel" id="panel-transit">
+    <div class="section-title"><span class="section-badge">🚃</span><h2>交通速查</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>基地站：錦絲町</h3>
+      <p style="margin:0; font-size:0.9rem;">JR總武線／東京地下鐵半藏門線交會站，步行可達 Orinas錦糸町 購物中心。</p>
+    </div>
+    <div class="card">
+      <h3>各日交通摘要</h3>
+      <div class="table-scroll">
+      <table>
+        <tr><th>日期</th><th>目的地</th><th>建議路線</th></tr>
+        <tr><td>10/6</td><td>淺草</td><td>總武線轉乘 或 都營淺草線直達（約15-20分）</td></tr>
+        <tr><td>10/7</td><td>鎌倉</td><td>東京站轉JR橫須賀線直達（約1小時內）</td></tr>
+        <tr><td>10/8</td><td>箱根</td><td>新宿轉小田急浪漫特快直達箱根湯本</td></tr>
+        <tr><td>10/9</td><td>橫濱／石川町</td><td>JR總武線接京濱東北・根岸線；中華街到關內站（ワンダリア横浜）約1站或步行15-20分</td></tr>
+        <tr><td>10/10</td><td>澀谷・原宿</td><td>視轉乘查詢當日路線</td></tr>
+        <tr><td>10/11</td><td>銀座・東京車站</td><td>視轉乘查詢當日路線</td></tr>
+        <tr><td>10/12</td><td>成田機場</td><td>成田特快N'EX 或 京成＋都營淺草線</td></tr>
+      </table>
+      </div>
+      <div class="note-box">10/8、10/9兩天從錦絲町出發都比原先「上野出發」多一段轉乘，建議各多預留15-20分鐘緩衝。</div>
+    </div>
+    <div class="card">
+      <h3>交通票券偏好 <span class="tag">待確認</span></h3>
+      <p style="margin:0; font-size:0.9rem;">東京市區交通尚未決定採用：IC卡（Suica/Pasmo）逐次刷卡、東京地鐵通票、或部分區間JR Pass，三者擇一或混用待確認。</p>
+    </div>
+  </section>
+
+  <!-- 美食 -->
+  <section class="panel" id="panel-food">
+    <div class="section-title"><span class="section-badge">🍜</span><h2>美食</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <h3>已確認美食點</h3>
+      <div class="table-scroll">
+      <table>
+        <tr><th>店名</th><th>日期</th><th>備註</th></tr>
+        <tr><td>天婦羅 大黒家 本店</td><td>10/6</td><td>只收現金，不接受訂位</td></tr>
+        <tr><td>とんかつ 夏の家</td><td>10/6</td><td>炸豬排定食</td></tr>
+        <tr><td>壽壽喜園 淺草本店</td><td>10/6</td><td>整理券建議中午前後儘早排隊</td></tr>
+        <tr><td>稲村崎Yoridocoro</td><td>10/7 13:15</td><td>已訂位，待確認定食選項與費用細項</td></tr>
+        <tr><td>eggslut / 牛たんの檸檬（新宿）</td><td>10/8</td><td>箱根回程晚餐候選</td></tr>
+        <tr><td>俺流塩らーめん</td><td>10/10</td><td>近表參道</td></tr>
+        <tr><td>im donuts／三ツ矢堂</td><td>10/10</td><td>中目黒短程繞路（選配）</td></tr>
+        <tr><td>東京壽司・鰻ひつまぶし備長・喜助・麵屋武蔵 虎嘯</td><td>10/11</td><td>銀座／東京車站／六本木美食候選，建議先訂位</td></tr>
+      </table>
+      </div>
+    </div>
+    <div class="card">
+      <h3>超市採買清單（伴手禮參考）</h3>
+      <table class="kv">
+        <tr><td>現場可吃</td><td>無籽巨峰／麝香葡萄、烤蕃薯、明治牛乳</td></tr>
+        <tr><td>可帶回家</td><td>ほりにし調味粉、平替六花亭、日清高蛋白海鮮杯麵、Bourbon餅乾（ガトーレーズン、ルマンド）、エバラ豆乳ごま鍋つゆ</td></tr>
+      </table>
+      <div class="note-box">住宿地點沒有廚房，需烹煮的鍋底湯類意義不大（除非帶回台灣自用）；不需烹煮、耐放的品項（調味粉、餅乾、杯麵）較適合當伴手禮。</div>
+    </div>
+  </section>
+
+  <!-- 出發前待辦 -->
+  <section class="panel" id="panel-todo">
+    <div class="section-title"><span class="section-badge">✅</span><h2>出發前待辦</h2></div>
+    <hr class="section-underline">
+    <div class="card">
+      <ul class="checklist">
+        <li><input type="checkbox"> 確認 D7（10/11）銀座／六本木美食店家訂位（東京壽司等熱門店建議先訂）</li>
+        <li><input type="checkbox"> 確認稲村崎Yoridocoro訂位表單是否完整選好定食項目</li>
+        <li><input type="checkbox"> 確認稲村崎Yoridocoro ¥1,000/人是否為座位費（獨立於餐費之外）</li>
+        <li><input type="checkbox"> 確認交通票券偏好：IC卡 vs 東京地鐵通票 vs 部分區間JR Pass</li>
+        <li><input type="checkbox"> 確認 Brillia ist Kinshi Park（Airbnb）入住方式：自助辦理或有人接待、鑰匙領取流程</li>
+        <li><input type="checkbox"> 確認元祖油堂拍照的分店位置（連鎖店，有多個據點）</li>
+        <li><input type="checkbox"> 10/8箱根、10/9橫濱交通改由錦絲町出發，重新確認實際轉乘班次與時間</li>
+        <li><input type="checkbox"> 決定10/9是否排入ワンダリア横浜，若要去建議事先於官網（wonderia.jp）購票並確認要犧牲哪一個橫濱景點</li>
+        <li><input type="checkbox"> 10/11、10/12連假期間熱門餐廳與交通提前規劃、預留緩衝時間</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>東京家族旅行手冊・僅供行程參考，實際時刻與票價請以現場公告為準</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.pill');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.getElementById(tab.dataset.target);
+      if (target) target.classList.add('active');
+      tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    });
+  });
+</script>
+
+</body>
+</html>
